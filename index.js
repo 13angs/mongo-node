@@ -18,10 +18,10 @@ async function dropAllDatabases() {
 
         // Drop all user-created databases (exclude admin and local)
         for (const db of databases.databases) {
-            // if (db.name !== 'admin' && db.name !== 'local') {
-            //     // await client.db(db.name).dropDatabase();
-            // }
-            console.log(`Dropped database: ${db.name}`);
+            if (db.name !== 'admin' && db.name !== 'config' && db.name !== 'local') {
+                await client.db(db.name).dropDatabase();
+                console.log(`Dropped database: ${db.name}`);
+            }
         }
     } finally {
         // Close the client connection
